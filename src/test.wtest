@@ -1,0 +1,132 @@
+import actividad.*
+import socio.*
+describe "test" {
+
+
+	const espaniol = new Idioma()
+	const ingles = new Idioma()
+	const frances = new Idioma()
+	const italiano = new Idioma()
+	const cordoba = new ExcursionALaCiudad(cantidadDeAtracciones = 4, idiomasUsados = [espaniol,ingles,frances])
+	const islasEscosesa = new ExcursionALaCiudadTropical(cantidadDeAtracciones=4, idiomasUsados=[ingles])
+	const jujuy = new ExcursionALaCiudad(cantidadDeAtracciones = 8, idiomasUsados = [espaniol])
+	const senegal = new ExcursionALaCiudadTropical(cantidadDeAtracciones=8, idiomasUsados=[frances])
+	const aconcagua = new SalidaDeTrekking(kilometroDeSendero = 100, diasDeSol = 130)
+	const unitorco = new SalidaDeTrekking(kilometroDeSendero = 50, diasDeSol = 240,idiomasUsados = [espaniol,ingles,frances])
+	const pinamar = new ViajeDePlaya(largoDePlaya=1000)
+	const roma = new ViajeDePlaya(largoDePlaya=2000,idiomasUsados=[italiano])
+	const delBoca = new ClaseDeGimnasia(idiomasUsados=[espaniol])
+	const roque = new SocioTranquilo(actividades=[pinamar,roma],maximoDeActividades=2)
+	const pepe = new SocioRelajado(edad=25)
+	test "la excursion a CORDOBA lleva 2 dias" {
+		assert.equals(2, cordoba.cuantosDiasDeActividas())
+	}
+
+	test "la excursion a CORDOBA NO implica esfuerzo" {
+		assert.notThat(cordoba.implicaFuerza())
+	}
+
+	test "la excursion a CORDOBA NO sirve para broncearse" {
+		assert.notThat(cordoba.sirveParaBroncearse())
+	}
+	
+	test "la excursion a islasEscosesa lleva 3 dias" {
+		assert.equals(3, islasEscosesa.cuantosDiasDeActividas())
+	}
+
+	test "la excursion a islasEscosesa NO implica esfuerzo" {
+		assert.notThat(islasEscosesa.implicaFuerza())
+	}
+
+	test "la excursion a islasEscosesa sirve para broncearse" {
+		assert.that(islasEscosesa.sirveParaBroncearse())
+	}
+	
+	test "la excursion a jujuy lleva 4 dias" {
+		assert.equals(4, jujuy.cuantosDiasDeActividas())
+	}
+
+	test "la excursion a jujuy  implica esfuerzo" {
+		assert.that(jujuy.implicaFuerza())
+	}
+
+	test "la excursion a jujuy sirve para broncearse" {
+		assert.notThat(jujuy.sirveParaBroncearse())
+	}
+	
+	test "la excursion a senegal lleva 5 dias" {
+		assert.equals(5, senegal.cuantosDiasDeActividas())
+	}
+
+	test "la excursion a senegal implica esfuerzo" {
+		assert.that(senegal.implicaFuerza())
+	}
+
+	test "la excursion a senegal  sirve para broncearse" {
+		assert.that(senegal.sirveParaBroncearse())
+	}
+	test "la salida de TREEKING al ACONCAGUA  lleva 2 dias" {
+		assert.equals(2, aconcagua.cuantosDiasDeActividas())
+	}
+
+	test "la salida de TREEKING al ACONCAGUA implica esfuerzo" {
+		assert.that(aconcagua.implicaFuerza())
+	}
+
+	test "la salida de TREEKING al ACONCAGUA NO sirve para broncearse" {
+		assert.notThat(aconcagua.sirveParaBroncearse())
+	}
+	test "la salida deTREEKING al UNITORCO   lleva 2 dias" {
+		assert.equals(1, unitorco.cuantosDiasDeActividas())
+	}
+
+	test "la salida de TREEKING al UNITORCO NO implica esfuerzo" {
+		assert.notThat(unitorco.implicaFuerza())
+	}
+
+	test "la salida de TREEKING al UNITORCO sirve para broncearse" {
+		assert.that(unitorco.sirveParaBroncearse())
+	}
+	//PUNTO 2 VIAJE INTERESANTE
+	test "la excursion a CORDOBA ES INTERESANTE" {
+		assert.that(cordoba.viajeInteresante())
+	}
+	test "la excursion a UNITORCO ES INTERESANTE" {
+		assert.that(unitorco.viajeInteresante())
+	}
+	test "la excursion al ACONCAGUA NO ES INTERESANTE" {
+		assert.notThat(aconcagua.viajeInteresante())
+	}
+	 //PUNTO 3 CLASE DE GIMNASIA
+	 test "La actividad de Gimnasia  lleva 1dias" {
+		assert.equals(1, delBoca.cuantosDiasDeActividas())
+	}
+
+	test "La actividad de Gimnasia  implica esfuerzo" {
+		assert.that(delBoca.implicaFuerza())
+	}
+
+	test "La actividad de Gimnasia NO sirve para broncearse" {
+		assert.notThat(delBoca.sirveParaBroncearse())
+	}
+	// PUNTO 4 SOCIOS 
+	test "ROQUE es Adorador del sol"{
+		assert.that(roque.esAdoradorDelSol())
+	}
+	test "ROQUE tiene la actividad esforzadora en ROMA"{
+		assert.equals([roma],roque.actividadesReforzadas())
+	}
+	
+	//PUNTO 5 ACTIVIDADES ATRACTIVA
+	test "ROQUE le es atractivo el VIAJE a SENEGAL "{
+		assert.that(roque.lactividadEsAtractiva(senegal))
+	}
+	
+	//PUNTO 6 ACTVIDADES RECOMENDADA
+	test "EL VIAJE A senegal no ES recomendado para ROQUE "{
+		assert.notThat(senegal.esRecomendablePara(roque))
+	}
+	test "La calse de GIMNASIA es recomendado para PEPE "{
+		assert.notThat(delBoca.esRecomendablePara(pepe))
+	}
+}
