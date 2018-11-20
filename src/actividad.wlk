@@ -1,6 +1,6 @@
 import socio.*
 
-class Actividad {
+class Actividad { // No se hereda nada
 
 	var idiomasUsados = []
 
