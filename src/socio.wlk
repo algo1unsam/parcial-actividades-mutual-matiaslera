@@ -26,12 +26,12 @@ class SocioTranquilo inherits Socio{
 class SocioCoherente inherits Socio{
 override method lactividadEsAtractiva(actividad){
 	if (self.esAdoradorDelSol()) actividades.all({act=>act.sirveParaBroncearse()})
-	else actividades.all({act=>act.implicaFuerza()})
+	else actividades.all({act=>act.implicaFuerza()}) // Falta return. No considera la actividad. 
 }
 }
 class SocioRelajado inherits Socio{
 	override method lactividadEsAtractiva(actividad){
-		idiomaHablado.contains({idioma=>idioma==actividad.idiomasUsados()})
+		idiomaHablado.contains({idioma=>idioma==actividad.idiomasUsados()}) //Mal usado el contains y la lista de idiomas usados
 	}
 }
 
